@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liberty Notebook Planner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    
+    <!-- TOP NAVBAR -->
+    <header class="app-header">
+       <div class="logo">
+          <i class="fas fa-book-open" style="color:var(--primary)"></i> Liberty Planner
+       </div>
+       <div class="header-actions">
+          <button class="btn-tonal" id="toggle-resources"><i class="fas fa-folder-open"></i> Resources</button>
+          <button class="btn-primary" id="btn-print"><i class="fas fa-print"></i> Export to PDF</button>
+       </div>
+    </header>
+
+    <div class="main-layout">
+       
+       <!-- LEFT SIDEBAR: SOURCES & SETUP -->
+       <aside class="sidebar-sources">
+          <div class="sidebar-header">
+            <h2>Lesson Sources</h2>
+            <p>Setup context and references</p>
+          </div>
+          
+          <div class="source-list">
+             <!-- Metadata Inputs (acting as 'Sources' context) -->
+             <div class="source-item">
+                <i class="fas fa-calendar-alt source-icon"></i>
+                <div class="source-content">
+                  <label>Date</label>
+                  <input type="date" id="date-input">
+                </div>
+             </div>
+
+             <div class="source-item">
+                <i class="fas fa-shapes source-icon"></i>
+                <div class="source-content">
+                  <label>Content Area</label>
+                  <select id="content-select"><option disabled selected value="">Select Content</option></select>
+                </div>
+             </div>
+
+             <div class="source-item">
+                <i class="fas fa-chalkboard-teacher source-icon"></i>
+                <div class="source-content">
+                  <label>Course</label>
+                  <select id="course-select" disabled><option disabled selected value="">Select Course</option></select>
+                </div>
+             </div>
+
+             <div class="source-item">
+                <i class="fas fa-th-large source-icon"></i>
+                <div class="source-content">
+                  <label>Unit Focus</label>
+                  <select>
+                    <option disabled selected value="">Select Unit</option>
+                    <option>Unit 1</option><option>Unit 2</option><option>Unit 3</option>
+                    <option>Unit 4</option><option>Unit 5</option><option>Unit 6</option>
+                  </select>
+                </div>
+             </div>
+          </div>
+
+          <!-- FILE UPLOAD "ADD SOURCE" BUTTON STYLE -->
+          <div class="add-source-section">
+             <div class="add-source-btn dropzone" id="dz">
+                <i class="fas fa-plus"></i>
+                <span>Add assessment files...</span>
+                <input type="file" id="fi" multiple hidden>
+             </div>
+             <ul id="fl" class="file-list"></ul>
+          </div>
+       </aside>
+
+       <!-- CENTER CANVAS: THE NOTEBOOK -->
+       <main class="notebook-canvas">
+          <div class="document-pane">
+             <div class="doc-header">
+                <div>
+                  <h1 class="doc-title">UbD Lesson Blueprint</h1>
+                  <span class="doc-subtitle">Autosaved locally</span>
+                </div>
+             </div>
+
+             <div class="doc-body">
+                <!-- Stage 1 -->
+                <div class="stage-block">
+                   <div class="stage-label"><span class="pill-badge b-teal">Stage 1</span> Desired Results</div>
+                   <div class="input-wrap full">
+                      <label>Established Goals / Standards</label>
+                      <textarea rows="2" placeholder="List relevant standards..."></textarea>
+                   </div>
+                   <div class="split-row">
+                      <div class="input-wrap"><label>Enduring Understandings</label><textarea rows="3" placeholder="Students will understand that..."></textarea></div>
+                      <div class="input-wrap"><label>Essential Questions</label><textarea rows="3" placeholder="Provocative questions..."></textarea></div>
+                   </div>
+                   <div class="split-row">
+                      <div class="input-wrap"><label>Students will know...</label><textarea rows="3" placeholder="Key knowledge..."></textarea></div>
+                      <div class="input-wrap"><label>Students will be able to...</label><textarea rows="3" placeholder="Key skills..."></textarea></div>
+                   </div>
+                </div>
+
+                <!-- Stage 2 -->
+                <div class="stage-block">
+                   <div class="stage-label"><span class="pill-badge b-pink">Stage 2</span> Assessment Evidence</div>
+                   <div class="split-row">
+                      <div class="input-wrap"><label>Performance Tasks</label><textarea rows="5" placeholder="Complex, authentic assessment tasks..."></textarea></div>
+                      <div class="input-wrap"><label>Other Evidence</label><textarea rows="5" placeholder="Quizzes, tests, prompts, observations..."></textarea></div>
+                   </div>
+                </div>
+
+                <!-- Stage 3 -->
+                <div class="stage-block">
+                   <div class="stage-label"><span class="pill-badge b-green">Stage 3</span> Learning Plan</div>
+                   <div class="input-wrap full">
+                      <label>Learning Activities (WHERETO)</label>
+                      <textarea rows="8" placeholder="Detail instructional activities, sequence, and differentiation..."></textarea>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </main>
+       
+       <!-- RIGHT SIDEBAR: RESOURCES (HIDDEN BY DEFAULT WITH CSS TOGGLE) -->
+       <aside class="sidebar-resources" id="resources-pane">
+          <div class="res-header">
+             <h2>Curriculum Assets</h2>
+             <button class="icon-btn" id="close-res"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="res-list">
+            <div class="res-card">
+              <div class="res-icon" style="background:var(--primary-container); color:var(--on-primary-container)"><i class="fas fa-book-open"></i></div>
+              <div class="res-info">
+                <h3>Curriculum Guide</h3>
+                <a href="#">Open Guide</a>
+              </div>
+            </div>
+            <div class="res-card">
+               <div class="res-icon" style="background:#fce8e6; color:#d93025"><i class="fas fa-lightbulb"></i></div>
+               <div class="res-info">
+                 <h3>Strategies Toolkit</h3>
+                 <a href="#">View Toolkit</a>
+               </div>
+             </div>
+             <div class="res-card">
+               <div class="res-icon" style="background:#e6f4ea; color:#1e8e3e"><i class="fas fa-laptop"></i></div>
+               <div class="res-info">
+                 <h3>Technology Portal</h3>
+                 <a href="#">Go to Portal</a>
+               </div>
+             </div>
+             <div class="res-card">
+               <div class="res-icon" style="background:#fef7e0; color:#f29900"><i class="fas fa-users"></i></div>
+               <div class="res-info">
+                 <h3>PLC Community</h3>
+                 <a href="#">Join Discussion</a>
+               </div>
+             </div>
+          </div>
+       </aside>
+
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
